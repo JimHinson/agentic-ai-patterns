@@ -1,0 +1,7 @@
+openai>=1.0.0
+asyncio
+concurrent.futures
+typing
+json
+time
+datetime
