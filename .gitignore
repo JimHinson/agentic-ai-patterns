@@ -205,3 +205,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Generated AI content files (should not be committed)
+research_report_*.json
+document_analysis_*.json
+generation_report_*.json
+generated_guide_*.md
