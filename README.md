@@ -43,6 +43,20 @@ An intelligent routing system that analyzes incoming requests and directs them t
 
 ## Getting Started
 
+### Quick Demo
+
+Try the interactive demo to see both patterns in action:
+
+```bash
+python demo.py
+```
+
+This demo works with or without an OpenAI API key:
+- **Without API key**: Shows intelligent routing decisions and pattern classification
+- **With API key**: Demonstrates full functionality with actual LLM responses
+
+### Individual Pattern Examples
+
 Each pattern example includes:
 - Comprehensive implementation with detailed comments
 - Usage examples and demonstrations
@@ -57,7 +71,7 @@ cd <pattern_folder>
 pip install -r requirements.txt
 ```
 
-2. Set your OpenAI API key:
+2. Set your OpenAI API key (optional for routing demo):
 ```bash
 export OPENAI_API_KEY=your_api_key_here
 ```
@@ -74,14 +88,15 @@ python example.py
 | Simple Agent | Low | None | General | Limited |
 | Routing Agent | Medium | High | Specialized | Good |
 
-## Future Patterns
+## Files
 
-This repository will be expanded to include additional agentic AI patterns such as:
-- Hierarchical agents
-- Pipeline patterns
-- Collaborative agent patterns
-- And more...
+This repository contains:
+
+- `demo.py` - Interactive demonstration of both patterns
+- `01_simple_agent/` - Simple Agent pattern implementation
+- `02_routing_agent/` - Routing Agent pattern implementation 
+- `README.md` - This documentation
 
 ## Contributing
 
-Feel free to contribute additional pattern implementations or improvements to existing examples.
+Feel free to contribute additional pattern implementations or improvements to existing examples. The goal is to provide clear, practical examples of agentic AI design patterns that developers can learn from and build upon.

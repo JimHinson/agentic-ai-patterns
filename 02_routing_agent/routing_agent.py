@@ -66,7 +66,8 @@ class RouterAgent:
             RequestType.CODE: [
                 r'\b(?:python|javascript|java|c\+\+|html|css|sql|function|class|variable|loop|if|else)\b',
                 r'\b(?:debug|code|programming|software|algorithm|data structure|api|database)\b',
-                r'\b(?:compile|syntax|error|bug|script|library|framework|repository)\b'
+                r'\b(?:compile|syntax|error|bug|script|library|framework|repository)\b',
+                r'\b(?:def |function |class |import |from |return |print\()\b'
             ],
             RequestType.CREATIVE: [
                 r'\b(?:write|create|poem|story|song|lyrics|creative|artistic|design|brainstorm)\b',
