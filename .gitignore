@@ -205,3 +205,7 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Generated examples and outputs
+prompt-chaining/execution_log.json
+prompt-chaining/generated_article.md
