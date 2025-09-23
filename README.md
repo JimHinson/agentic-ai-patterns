@@ -8,7 +8,7 @@ Want to run these patterns with actual LLMs? See **[AGENT_SETUP.md](AGENT_SETUP.
 **Quick setup:**
 ```bash
 # 1. Install dependencies
-pip install -r prompt-chaining/requirements.txt
+pip install -r 01_prompt_chaining/requirements.txt
 
 # 2. Set up API keys
 copy .env.example .env
@@ -21,7 +21,7 @@ python agent_runner.py --interactive
 ## Patterns Implemented
 
 ### 1. Prompt Chaining ✅
-**Location:** `prompt-chaining/`
+**Location:** `01_prompt_chaining/`
 
 A pattern where the output of one AI prompt becomes the input to the next prompt in a sequence, creating a pipeline of interconnected AI interactions.
 
@@ -46,7 +46,7 @@ A pattern where the output of one AI prompt becomes the input to the next prompt
 **Usage:**
 ```bash
 # Original examples (mock responses)
-cd prompt-chaining
+cd 01_prompt_chaining
 python prompt_chaining.py    # Run the main article creation demo
 python examples.py          # Run various usage examples
 
@@ -67,7 +67,7 @@ agentic-ai-patterns/
 ├── .env.example           # API key template
 ├── AGENT_SETUP.md         # Complete setup guide
 ├── README.md              # This file
-└── prompt-chaining/       # Pattern 1: Prompt Chaining
+└── 01_prompt_chaining/    # Pattern 1: Prompt Chaining
     ├── prompt_chaining.py   # Original mock implementation
     ├── examples.py          # Usage examples
     ├── requirements.txt     # Dependencies

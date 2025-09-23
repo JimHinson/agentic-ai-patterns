@@ -8,7 +8,7 @@ This guide will help you set up and run actual AI agents using the agentic patte
 
 ```bash
 cd agentic-ai-patterns
-pip install -r prompt-chaining/requirements.txt
+pip install -r 01_prompt_chaining/requirements.txt
 ```
 
 ### 2. Set Up API Keys
@@ -168,7 +168,7 @@ result = chain.execute(topic="Your topic here")
 ### Common Issues
 
 **Import errors:**
-- Make sure you've installed the requirements: `pip install -r prompt-chaining/requirements.txt`
+- Make sure you've installed the requirements: `pip install -r 01_prompt_chaining/requirements.txt`
 
 **API key errors:**
 - Check that your `.env` file exists and has valid API keys
