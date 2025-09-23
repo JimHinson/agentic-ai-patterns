@@ -1,102 +1,108 @@
 # agentic-ai-patterns
 Examples of the 20 patterns presented by Mark Kashef in his YouTube video "Master ALL 20 Agentic AI Design Patterns [Complete Course]"
 
-## Pattern Examples
+## 🚀 Quick Start with Real AI Agents
 
-This repository contains practical implementations of key agentic AI patterns, starting with foundational patterns and building up to more complex architectures.
+Want to run these patterns with actual LLMs? See **[AGENT_SETUP.md](AGENT_SETUP.md)** for a complete setup guide.
 
-### 01. Simple Agent Pattern
-**Location:** `01_simple_agent/`
+**Quick setup:**
+```bash
+# 1. Install dependencies
+pip install -r prompt-chaining/requirements.txt
 
-The most basic agentic AI pattern where a single agent handles all types of requests without specialization. This serves as the foundation for understanding more complex patterns.
+# 2. Set up API keys
+copy .env.example .env
+# Edit .env with your OpenAI/Anthropic API keys
+
+# 3. Run your first agent
+python agent_runner.py --interactive
+```
+
+## Patterns Implemented
+
+### 1. Prompt Chaining ✅
+**Location:** `prompt-chaining/`
+
+A pattern where the output of one AI prompt becomes the input to the next prompt in a sequence, creating a pipeline of interconnected AI interactions.
 
 **Key Features:**
-- Single general-purpose agent
-- Handles all request types
-- Simple conversation memory
-- Basic error handling
+- Sequential processing with context preservation
+- Modular design for complex problem solving
+- Comprehensive article creation example
+- Multiple usage examples and patterns
+- **NEW: Real LLM integration** - Run with OpenAI, Anthropic, or other providers
 
-**Use Cases:**
-- Prototyping and early development
-- Simple chatbots
-- Educational purposes
-- Low-complexity applications
+**Files:**
+- `prompt_chaining.py` - Original implementation with mock responses
+- `examples.py` - Various usage examples and patterns
+- `README.md` - Detailed documentation and explanation
 
-### 02. Routing Agent Pattern
-**Location:** `02_routing_agent/`
+**Agent Framework (NEW):**
+- `agent_core.py` - Core agent framework for real LLM integration
+- `agent_runner.py` - Command-line interface for running agents
+- `config.json` - Configuration for models and providers
+- `.env.example` - Template for API keys
 
-An intelligent routing system that analyzes incoming requests and directs them to specialized agents based on request type and content. This pattern demonstrates how to achieve better performance through specialization while maintaining a unified interface.
-
-**Key Features:**
-- Central router with intelligent request classification
-- Multiple specialized agents (Math, Code, Creative, Factual, Analysis)
-- Agent registry system for managing capabilities
-- Performance monitoring and load balancing
-- Graceful fallback mechanisms
-
-**Use Cases:**
-- Multi-domain chatbots
-- Enterprise applications with different functional areas
-- Educational platforms with subject-specific tutors
-- Content management systems
-- API gateways for microservices
-
-## Getting Started
-
-### Quick Demo
-
-Try the interactive demo to see both patterns in action:
-
+**Usage:**
 ```bash
-python demo.py
+# Original examples (mock responses)
+cd prompt-chaining
+python prompt_chaining.py    # Run the main article creation demo
+python examples.py          # Run various usage examples
+
+# Real AI agents (requires API keys)
+python agent_runner.py --interactive                    # Interactive mode
+python agent_runner.py --pattern prompt_chaining        # Command line
+python agent_runner.py --provider anthropic --topic "AI Safety"    # Anthropic
+python agent_runner.py --provider gemini --topic "Climate Tech"    # Google Gemini
 ```
 
-This demo works with or without an OpenAI API key:
-- **Without API key**: Shows intelligent routing decisions and pattern classification
-- **With API key**: Demonstrates full functionality with actual LLM responses
+## Project Structure
 
-### Individual Pattern Examples
-
-Each pattern example includes:
-- Comprehensive implementation with detailed comments
-- Usage examples and demonstrations
-- README with pattern explanation and use cases
-- Requirements file with dependencies
-
-To run any example:
-
-1. Install dependencies:
-```bash
-cd <pattern_folder>
-pip install -r requirements.txt
+```
+agentic-ai-patterns/
+├── agent_core.py           # Core agent framework
+├── agent_runner.py         # Main script for running agents
+├── config.json            # Agent configuration
+├── .env.example           # API key template
+├── AGENT_SETUP.md         # Complete setup guide
+├── README.md              # This file
+└── prompt-chaining/       # Pattern 1: Prompt Chaining
+    ├── prompt_chaining.py   # Original mock implementation
+    ├── examples.py          # Usage examples
+    ├── requirements.txt     # Dependencies
+    └── README.md           # Pattern documentation
 ```
 
-2. Set your OpenAI API key (optional for routing demo):
-```bash
-export OPENAI_API_KEY=your_api_key_here
-```
+## Supported LLM Providers
 
-3. Run the example:
-```bash
-python example.py
-```
-
-## Pattern Comparison
-
-| Pattern | Complexity | Specialization | Performance | Scalability |
-|---------|------------|---------------|-------------|-------------|
-| Simple Agent | Low | None | General | Limited |
-| Routing Agent | Medium | High | Specialized | Good |
-
-## Files
-
-This repository contains:
-
-- `demo.py` - Interactive demonstration of both patterns
-- `01_simple_agent/` - Simple Agent pattern implementation
-- `02_routing_agent/` - Routing Agent pattern implementation 
-- `README.md` - This documentation
+- ✅ **OpenAI** - GPT-4o, GPT-4o-mini, GPT-4-turbo, GPT-3.5-turbo
+- ✅ **Anthropic** - Claude 3 Opus, Sonnet, Haiku
+- ✅ **Google Gemini** - Gemini 1.5 Pro, Flash, Gemini 1.0 Pro
+- 🔄 **More coming soon** - Cohere, local models via Ollama
 
 ## Contributing
 
-Feel free to contribute additional pattern implementations or improvements to existing examples. The goal is to provide clear, practical examples of agentic AI design patterns that developers can learn from and build upon.
+We're implementing all 20 agentic patterns! Here's our roadmap:
+
+- [x] 1. Prompt Chaining
+- [ ] 2. Sequential Processing
+- [ ] 3. Conditional Logic
+- [ ] 4. Parallel Processing
+- [ ] 5. Recursive Prompting
+- [ ] 6. State Management
+- [ ] 7. Tool Integration
+- [ ] 8. Multi-Agent Coordination
+- [ ] 9. Hierarchical Planning
+- [ ] 10. Memory Integration
+- [ ] ... and 10 more!
+
+Want to contribute? Each pattern needs:
+1. Core implementation in its own directory
+2. Integration with the agent framework
+3. Documentation and examples
+4. Real LLM testing
+
+## License
+
+MIT License - feel free to use these patterns in your own projects!

@@ -1,0 +1,48 @@
+{
+  "providers": {
+    "openai": {
+      "models": [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4-turbo",
+        "gpt-3.5-turbo"
+      ],
+      "default_model": "gpt-4o-mini",
+      "api_key_env": "OPENAI_API_KEY",
+      "base_url_env": "OPENAI_BASE_URL"
+    },
+    "anthropic": {
+      "models": [
+        "claude-3-opus-20240229",
+        "claude-3-sonnet-20240229",
+        "claude-3-haiku-20240307"
+      ],
+      "default_model": "claude-3-haiku-20240307",
+      "api_key_env": "ANTHROPIC_API_KEY"
+    },
+    "gemini": {
+      "models": [
+        "gemini-1.5-pro",
+        "gemini-1.5-flash",
+        "gemini-1.0-pro"
+      ],
+      "default_model": "gemini-1.5-flash",
+      "api_key_env": "GOOGLE_API_KEY"
+    }
+  },
+  "generation_settings": {
+    "temperature": 0.7,
+    "max_tokens": 4000,
+    "timeout": 30
+  },
+  "patterns": {
+    "prompt_chaining": {
+      "description": "Sequential processing where output of one prompt becomes input to the next",
+      "examples": [
+        "article_creation",
+        "research_pipeline",
+        "content_refinement"
+      ]
+    }
+  }
+}
