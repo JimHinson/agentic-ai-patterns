@@ -28,12 +28,30 @@
       ],
       "default_model": "gemini-1.5-flash",
       "api_key_env": "GOOGLE_API_KEY"
+    },
+    "ollama": {
+      "models": [
+        "phi3:mini",
+        "orca-mini:3b",
+        "llama3.1:8b",
+        "llama3.1:70b",
+        "llama2:7b",
+        "llama2:13b",
+        "mistral:7b",
+        "codellama:7b",
+        "codellama:13b",
+        "neural-chat:7b",
+        "vicuna:7b"
+      ],
+      "default_model": "phi3:mini",
+      "base_url_env": "OLLAMA_BASE_URL",
+      "base_url_default": "http://localhost:11434"
     }
   },
   "generation_settings": {
     "temperature": 0.7,
     "max_tokens": 4000,
-    "timeout": 30
+    "timeout": 120
   },
   "patterns": {
     "prompt_chaining": {

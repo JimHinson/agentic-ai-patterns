@@ -18,6 +18,10 @@ import json
 import argparse
 from typing import Dict, Any, Optional
 import logging
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add the current directory to Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -169,14 +173,17 @@ Provide the final, polished version of the article.""",
         
         return chain
     
-    def run_prompt_chaining(self, provider: str = "openai", model: str = None, topic: str = "Artificial Intelligence", output_file: str = None):
+    def run_prompt_chaining(self, provider: str = "openai", model: str = None, topic: str = "Artificial Intelligence", output_file: str = None, timeout: int = None):
         """Run the prompt chaining pattern"""
         logger.info(f"Running prompt chaining with {provider} ({model or 'default model'})")
         logger.info(f"Topic: {topic}")
         
         try:
-            # Create agent configuration
-            config = self.create_agent_config(provider, model)
+            # Create agent configuration with custom timeout if provided
+            kwargs = {}
+            if timeout is not None:
+                kwargs['timeout'] = timeout
+            config = self.create_agent_config(provider, model, **kwargs)
             
             # Create and run the chain
             chain = self.create_prompt_chaining_example(config)
@@ -269,7 +276,7 @@ def main():
     parser = argparse.ArgumentParser(description="Run agentic AI patterns with real LLMs")
     parser.add_argument("--pattern", choices=["prompt_chaining"], default="prompt_chaining",
                         help="Which pattern to run")
-    parser.add_argument("--provider", choices=["openai", "anthropic", "gemini"], default="openai",
+    parser.add_argument("--provider", choices=["openai", "anthropic", "gemini", "ollama"], default="openai",
                         help="LLM provider to use")
     parser.add_argument("--model", help="Specific model to use (optional)")
     parser.add_argument("--topic", default="Artificial Intelligence",
@@ -281,6 +288,8 @@ def main():
                         help="Run in interactive mode")
     parser.add_argument("--config", default="config.json",
                         help="Configuration file path")
+    parser.add_argument("--timeout", type=int, default=None,
+                        help="Timeout in seconds (default: 120 for ollama, 30 for others)")
     
     args = parser.parse_args()
     
@@ -299,7 +308,8 @@ def main():
             provider=args.provider,
             model=args.model,
             topic=args.topic,
-            output_file=args.output
+            output_file=args.output,
+            timeout=args.timeout
         )
     else:
         print(f"Pattern '{args.pattern}' not implemented yet")

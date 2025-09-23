@@ -32,6 +32,12 @@ except ImportError:
     GEMINI_AVAILABLE = False
 
 try:
+    import requests
+    OLLAMA_AVAILABLE = True
+except ImportError:
+    OLLAMA_AVAILABLE = False
+
+try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
@@ -51,7 +57,7 @@ class AgentConfig:
     base_url: Optional[str] = None
     temperature: float = 0.7
     max_tokens: int = 4000
-    timeout: int = 30
+    timeout: int = 120  # Increased default timeout to 2 minutes for local LLMs
 
 
 class LLMProvider:
@@ -93,6 +99,12 @@ class LLMProvider:
             genai.configure(api_key=api_key)
             self.client = genai.GenerativeModel(self.config.model)
             
+        elif self.config.provider == "ollama" and OLLAMA_AVAILABLE:
+            # Ollama doesn't need API key, just base URL (default: http://localhost:11434)
+            self.base_url = self.config.base_url or os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+            # No client initialization needed for Ollama - we'll use requests directly
+            self.client = "ollama_client"
+            
         else:
             raise ValueError(f"Provider '{self.config.provider}' not available or not installed")
     
@@ -105,6 +117,8 @@ class LLMProvider:
                 return self._anthropic_generate(prompt, system_prompt)
             elif self.config.provider == "gemini":
                 return self._gemini_generate(prompt, system_prompt)
+            elif self.config.provider == "ollama":
+                return self._ollama_generate(prompt, system_prompt)
             else:
                 raise ValueError(f"Generation not implemented for provider: {self.config.provider}")
         
@@ -166,6 +180,42 @@ class LLMProvider:
         )
         
         return response.text
+    
+    def _ollama_generate(self, prompt: str, system_prompt: Optional[str] = None) -> str:
+        """Generate using Ollama local LLM"""
+        # Combine system prompt and user prompt
+        full_prompt = prompt
+        if system_prompt:
+            full_prompt = f"{system_prompt}\n\n{prompt}"
+        
+        # Prepare Ollama API request
+        payload = {
+            "model": self.config.model,
+            "prompt": full_prompt,
+            "stream": False,
+            "options": {
+                "temperature": self.config.temperature,
+                "num_predict": self.config.max_tokens
+            }
+        }
+        
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/generate",
+                json=payload,
+                timeout=self.config.timeout
+            )
+            response.raise_for_status()
+            
+            result = response.json()
+            return result.get("response", "")
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Ollama API request failed: {e}")
+            raise ValueError(f"Failed to connect to Ollama at {self.base_url}: {e}")
+        except Exception as e:
+            logger.error(f"Ollama response parsing failed: {e}")
+            raise ValueError(f"Failed to parse Ollama response: {e}")
 
 
 class AgentStep:
@@ -289,5 +339,6 @@ def list_available_providers() -> Dict[str, bool]:
     return {
         "openai": OPENAI_AVAILABLE and bool(os.getenv("OPENAI_API_KEY")),
         "anthropic": ANTHROPIC_AVAILABLE and bool(os.getenv("ANTHROPIC_API_KEY")),
-        "gemini": GEMINI_AVAILABLE and bool(os.getenv("GOOGLE_API_KEY"))
+        "gemini": GEMINI_AVAILABLE and bool(os.getenv("GOOGLE_API_KEY")),
+        "ollama": OLLAMA_AVAILABLE  # Ollama doesn't require API key
     }
