@@ -1,0 +1,34 @@
+[
+  {
+    "step": "research",
+    "timestamp": "2025-09-22T10:57:00.269925",
+    "execution_time": 9.207484,
+    "input_length": 59,
+    "output_length": 5681,
+    "success": true
+  },
+  {
+    "step": "structure",
+    "timestamp": "2025-09-22T10:57:07.958071",
+    "execution_time": 7.687646,
+    "input_length": 5796,
+    "output_length": 4852,
+    "success": true
+  },
+  {
+    "step": "draft",
+    "timestamp": "2025-09-22T10:57:19.256730",
+    "execution_time": 11.297666,
+    "input_length": 4966,
+    "output_length": 8638,
+    "success": true
+  },
+  {
+    "step": "review",
+    "timestamp": "2025-09-22T10:57:29.469621",
+    "execution_time": 10.212249,
+    "input_length": 8760,
+    "output_length": 7828,
+    "success": true
+  }
+]
